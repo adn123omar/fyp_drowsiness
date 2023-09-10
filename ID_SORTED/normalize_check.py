@@ -44,7 +44,7 @@ if __name__ == "__main__":
         [stat_shap, p_val_shapiro] = shapiro(cleaned_data)
 
         flagger = False
-        if p_val<=0.05 or p_val_shapiro<=0.05:
+        if p_val<=0.05 and p_val_shapiro<=0.05:
             flagger = True
             counter += 1
 
