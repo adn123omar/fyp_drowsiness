@@ -55,4 +55,6 @@ if __name__ == "__main__":
         new_col = pd.DataFrame({header: array_to_save})
         df_out = pd.concat([df_out, new_col], axis=1)
     
+    print(counter)
+    print(len(df_main.columns))
     df_out.to_csv("results/normal_checker.csv")
