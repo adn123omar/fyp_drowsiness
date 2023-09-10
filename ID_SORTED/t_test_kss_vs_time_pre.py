@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
     # Reading and creating dataframe for the data
-    df_main = pd.read_excel("kss_vs_time.xlsx")
+    df_main = pd.read_excel("kss_vs_time_pre.xlsx")
     df_out = pd.DataFrame()
     row_headers = ["n_sample time 1", "n_sample time 2", "mean_time_1", "std_time_1", "mean_time_2", "std_time_2","t-val", "p-val","alternative", "usable?"]
     row_col = pd.DataFrame({"time_of_day":row_headers})
@@ -138,4 +138,4 @@ if __name__ == "__main__":
     new_col = pd.DataFrame({"afternoong vs night": array_to_save_an})
     df_out = pd.concat([df_out, new_col], axis=1)
 
-    df_out.to_csv("t_test_kss_time_post.csv")
+    df_out.to_csv("t_test_kss_time_pre.csv")
