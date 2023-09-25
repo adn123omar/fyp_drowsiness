@@ -325,7 +325,7 @@ for path in os.listdir(dir_path):
         total_feature_matrix = np.transpose(total_feature_matrix)
         # print(total_feature_matrix)
 
-        total_feature_matrix.to_csv(dest_file_dir[0:-13]+"_emg_features.csv")
+        total_feature_matrix.to_csv(dest_file_dir[0:-13]+"_emg_features.csv", index=False)
 
         # df = pd.DataFrame(columns=features_names)
 

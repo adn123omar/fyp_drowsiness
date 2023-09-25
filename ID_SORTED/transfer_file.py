@@ -30,11 +30,14 @@ if __name__=='__main__':
                             emg_file = pd.read_csv(extract_folder + "emg_45_csv" + "/" + emg_string)
                             eeg_file = pd.read_csv(extract_folder + "eeg_45_csv" + "/" + eeg_string)
                             cap_file = pd.read_csv(extract_folder + "cap_45_csv" + "/" + cap_string)
+                            eeg_file.drop(columns=eeg_file.columns[0], axis=1, inplace=True)
+                            cap_file.drop(columns=cap_file.columns[0], axis=1, inplace=True)
 
-                            ecg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"ecg"+ "/"+ecg_string)
-                            emg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"emg"+ "/"+emg_string)
-                            eeg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"eeg"+ "/"+eeg_string)
-                            cap_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"cap"+ "/"+cap_string)
+
+                            ecg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"ecg"+ "/"+ecg_string, index=False)
+                            emg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"emg"+ "/"+emg_string, index=False)
+                            eeg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"eeg"+ "/"+eeg_string, index=False)
+                            cap_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"cap"+ "/"+cap_string, index=False)
                         elif sample[3] == "_":
                             print("hello")
                             id = sample[0:4]
@@ -47,10 +50,12 @@ if __name__=='__main__':
                             emg_file = pd.read_csv(extract_folder + "emg_45_csv" + "/" + emg_string)
                             eeg_file = pd.read_csv(extract_folder + "eeg_45_csv" + "/" + eeg_string)
                             cap_file = pd.read_csv(extract_folder + "cap_45_csv" + "/" + cap_string)
+                            eeg_file.drop(columns=eeg_file.columns[0], axis=1, inplace=True)
+                            cap_file.drop(columns=cap_file.columns[0], axis=1, inplace=True)
 
-                            ecg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"ecg"+ "/"+ecg_string)
-                            emg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"emg"+ "/"+emg_string)
-                            eeg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"eeg"+ "/"+eeg_string)
-                            cap_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"cap"+ "/"+cap_string)
+                            ecg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"ecg"+ "/"+ecg_string, index=False)
+                            emg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"emg"+ "/"+emg_string, index=False)
+                            eeg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"eeg"+ "/"+eeg_string, index=False)
+                            cap_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"cap"+ "/"+cap_string, index=False)
                     except FileNotFoundError:
                         continue

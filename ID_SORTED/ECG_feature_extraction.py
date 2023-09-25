@@ -91,7 +91,7 @@ for path in os.listdir(dir_path):
         for j in range(np.shape(features_array)[0]):
             df.loc[len(df)] = features_array[j,:]
 
-        df.to_csv(dest_file_dir[0:-13]+"_ecg_features.csv")    
+        df.to_csv(dest_file_dir[0:-13]+"_ecg_features.csv", index=False)    
 
 
 
