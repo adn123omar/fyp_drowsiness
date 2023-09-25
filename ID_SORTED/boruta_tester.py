@@ -22,17 +22,18 @@ def remove_outlier(arr):
     return new_arr
 
 if __name__ == "__main__":
-    df_main = pd.read_csv("features_analysis_all_cleaned.csv")
+    df_main = pd.read_csv("features_and_labels_15s.csv")
     df_out = pd.DataFrame()
 
     for i in range(0,len(df_main.columns)):
+        print(i)
         header = df_main.columns[i]
 
         trial_dataset = df_main.drop(header, axis=1)
         target = df_main[header]
 
         forest = RandomForestRegressor(n_jobs = -1,max_depth = len(df_main.columns))
-        boruta = BorutaPy(estimator = forest, n_estimators = 'auto', max_iter = 100)
+        boruta = BorutaPy(estimator = forest, n_estimators = 'auto', max_iter = 20)
 
         print(np.array(target))
         boruta.fit(np.array(trial_dataset), np.array(target))
@@ -44,4 +45,4 @@ if __name__ == "__main__":
         new_col = pd.DataFrame({header: array_to_save})
         df_out = pd.concat([df_out, new_col], axis=1)
     
-    df_out.to_csv("results/boruta.csv")
+    df_out.to_csv("results_15s/boruta.csv")
