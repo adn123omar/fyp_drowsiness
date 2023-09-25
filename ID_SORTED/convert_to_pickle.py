@@ -4,7 +4,7 @@ import tqdm
 
 def convert(f):
     df = pd.read_pickle(folder_path + "/" + f, compression="bz2")
-    df.to_csv(save_folder + "/" + f[0:-18] + "_eeg_features_filtered.csv")
+    df.to_csv(save_folder + "/" + f[0:-18] + "_emg_features_filtered.csv")
     # df = pd.read_pickle("DATA/test/test_landmarks" + ".pkl", compression='bz2')
     print("Converted " + f + " to pkl (compression = bz2)")
 
@@ -24,8 +24,8 @@ def string_maker(f):
 
 if __name__ == "__main__":
     filenames = []
-    folder_path = "emg_features_filtered"
-    save_folder = "emg_features_filtered"
+    folder_path = "results_45s/emg_45_csv/"
+    save_folder = "results_45s/emg_45_csv/"
     
     for f in os.listdir(folder_path):
         if f.endswith("filtered.pkl"):

@@ -298,9 +298,8 @@ def plot_features(signal, channel_name, fs, feature_matrix, step):
 
 # CODE TO DETECT FEATURES
 fs = 125
-wind_size = 15
-window_overlap = 14
-step_size = 5
+wind_size = 45
+step_size = 30
 
 wind_n_elements = fs*wind_size
 
@@ -317,7 +316,7 @@ for path in os.listdir(dir_path):
 
         ecg_data_clipped = emg_data[0:int(n_seconds_valid)*fs]
 
-        dest_file_dir = "emg_features_filtered\\"+path
+        dest_file_dir = "results_45s\\emg_45_csv\\"+path
 
         channel_name = "EMG"
 
@@ -326,7 +325,7 @@ for path in os.listdir(dir_path):
         total_feature_matrix = np.transpose(total_feature_matrix)
         # print(total_feature_matrix)
 
-        total_feature_matrix.to_pickle(dest_file_dir[0:-13]+"_emg_features_filtered.pkl", compression = "bz2")
+        total_feature_matrix.to_csv(dest_file_dir[0:-13]+"_emg_features.csv")
 
         # df = pd.DataFrame(columns=features_names)
 
