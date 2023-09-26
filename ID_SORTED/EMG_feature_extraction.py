@@ -298,8 +298,8 @@ def plot_features(signal, channel_name, fs, feature_matrix, step):
 
 # CODE TO DETECT FEATURES
 fs = 125
-wind_size = 45
-step_size = 30
+wind_size = 30
+step_size = 20
 
 wind_n_elements = fs*wind_size
 
@@ -316,7 +316,7 @@ for path in os.listdir(dir_path):
 
         ecg_data_clipped = emg_data[0:int(n_seconds_valid)*fs]
 
-        dest_file_dir = "results_45s\\emg_45_csv\\"+path
+        dest_file_dir = "results_30s\\emg_30_csv\\"+path
 
         channel_name = "EMG"
 

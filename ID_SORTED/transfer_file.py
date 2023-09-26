@@ -3,8 +3,8 @@ import pandas as pd
 
 if __name__=='__main__':
     source_folder = "unused/KSS_sort"
-    dest_folder = "KSS_sort_45/"
-    extract_folder = "results_45s/"
+    dest_folder = "KSS_sort_30/"
+    extract_folder = "results_30s/"
     for pre_post in os.listdir(source_folder):
         os.mkdir(dest_folder+pre_post)
         for KSS_val in os.listdir(source_folder+"/"+pre_post):
@@ -26,10 +26,10 @@ if __name__=='__main__':
                             eeg_string = id + "eeg_features.csv"
                             cap_string = id + "cap_features.csv"
                             
-                            ecg_file = pd.read_csv(extract_folder + "ecg_45_csv" + "/" + ecg_string)
-                            emg_file = pd.read_csv(extract_folder + "emg_45_csv" + "/" + emg_string)
-                            eeg_file = pd.read_csv(extract_folder + "eeg_45_csv" + "/" + eeg_string)
-                            cap_file = pd.read_csv(extract_folder + "cap_45_csv" + "/" + cap_string)
+                            ecg_file = pd.read_csv(extract_folder + "ecg_30_csv" + "/" + ecg_string)
+                            emg_file = pd.read_csv(extract_folder + "emg_30_csv" + "/" + emg_string)
+                            eeg_file = pd.read_csv(extract_folder + "eeg_30_csv" + "/" + eeg_string)
+                            cap_file = pd.read_csv(extract_folder + "cap_30_csv" + "/" + cap_string)
                             eeg_file.drop(columns=eeg_file.columns[0], axis=1, inplace=True)
                             cap_file.drop(columns=cap_file.columns[0], axis=1, inplace=True)
 
@@ -46,10 +46,10 @@ if __name__=='__main__':
                             eeg_string = id + "eeg_features.csv"
                             cap_string = id + "cap_features.csv"
                             
-                            ecg_file = pd.read_csv(extract_folder + "ecg_45_csv" + "/" + ecg_string)
-                            emg_file = pd.read_csv(extract_folder + "emg_45_csv" + "/" + emg_string)
-                            eeg_file = pd.read_csv(extract_folder + "eeg_45_csv" + "/" + eeg_string)
-                            cap_file = pd.read_csv(extract_folder + "cap_45_csv" + "/" + cap_string)
+                            ecg_file = pd.read_csv(extract_folder + "ecg_30_csv" + "/" + ecg_string)
+                            emg_file = pd.read_csv(extract_folder + "emg_30_csv" + "/" + emg_string)
+                            eeg_file = pd.read_csv(extract_folder + "eeg_30_csv" + "/" + eeg_string)
+                            cap_file = pd.read_csv(extract_folder + "cap_30_csv" + "/" + cap_string)
                             eeg_file.drop(columns=eeg_file.columns[0], axis=1, inplace=True)
                             cap_file.drop(columns=cap_file.columns[0], axis=1, inplace=True)
 

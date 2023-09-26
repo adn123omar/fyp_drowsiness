@@ -8,9 +8,7 @@ import hrvanalysis
 import os
 import math
 from hrv.filters import quotient
-from scipy import stats
-from scipy.signal import butter,filtfilt, find_peaks
-import matplotlib.pyplot as plt
+
 
 
 
@@ -30,8 +28,8 @@ def featureExtraction(rri, ECG, fs):
 
 ## CODE TO DETECT FEATURES 
 fs = 125
-wind_size = 45
-step_size = 30 * fs
+wind_size = 30
+step_size = 20 * fs
 wind_n_elements = fs * wind_size
 # ecg_features_list = ["HR", "VLF", "LF", "HF", "LF_HF", "Power", "rsp", "RRV_median", "RRV_mean", "RRV_ApEn", "HR_std", "Sh_Ent",
 #                                 "Approx", "fuzzy", "wave_ent", "HRV_mean", "HRV_std", "HRV_kurt", "HRV_var", "HRV_skew"]
@@ -62,7 +60,7 @@ for path in os.listdir(dir_path):
         
         # flag = not (n_windows == n_windows_check)
         
-        dest_file_dir = "results_45s\\ecg_45_csv\\"+path
+        dest_file_dir = "results_30s\\ecg_30_csv\\"+path
         counter = 0
         for i in range(0, len(ecg_data_clipped)-wind_n_elements+1, step_size):
             # print(i)
