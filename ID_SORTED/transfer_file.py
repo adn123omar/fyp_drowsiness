@@ -30,8 +30,8 @@ if __name__=='__main__':
                             emg_file = pd.read_csv(extract_folder + "emg_30_csv" + "/" + emg_string)
                             eeg_file = pd.read_csv(extract_folder + "eeg_30_csv" + "/" + eeg_string)
                             cap_file = pd.read_csv(extract_folder + "cap_30_csv" + "/" + cap_string)
-                            eeg_file.drop(columns=eeg_file.columns[0], axis=1, inplace=True)
-                            cap_file.drop(columns=cap_file.columns[0], axis=1, inplace=True)
+                            # eeg_file.drop(columns=eeg_file.columns[0], axis=1, inplace=True)
+                            # cap_file.drop(columns=cap_file.columns[0], axis=1, inplace=True)
 
 
                             ecg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"ecg"+ "/"+ecg_string, index=False)
@@ -51,7 +51,7 @@ if __name__=='__main__':
                             eeg_file = pd.read_csv(extract_folder + "eeg_30_csv" + "/" + eeg_string)
                             cap_file = pd.read_csv(extract_folder + "cap_30_csv" + "/" + cap_string)
                             # eeg_file.drop(columns=eeg_file.columns[0], axis=1, inplace=True)
-                            cap_file.drop(columns=cap_file.columns[0], axis=1, inplace=True)
+                            # cap_file.drop(columns=cap_file.columns[0], axis=1, inplace=True)
 
                             ecg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"ecg"+ "/"+ecg_string, index=False)
                             emg_file.to_csv(dest_folder+pre_post+"/"+KSS_val+"/"+"emg"+ "/"+emg_string, index=False)
