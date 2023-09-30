@@ -4,7 +4,7 @@ from sklearn.feature_selection import SelectKBest, f_regression
 
 if __name__ =="__main__":
     # Loading Dataset as pandas
-    dataset = pd.read_csv("features_and_labels_45s.csv")
+    dataset = pd.read_csv("features_and_labels_30s.csv")
     X = dataset.iloc[:,0:-2]
     y = dataset.iloc[:,-1]
 
