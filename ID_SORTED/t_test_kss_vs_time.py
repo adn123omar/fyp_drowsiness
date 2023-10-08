@@ -14,13 +14,14 @@ if __name__ == "__main__":
     df_out = pd.concat([df_out, row_col], axis = 1)
     df_main.head(1)
     # Extracting and cleaning out the data
-    morning_header = df_main.columns[0]
-    afternoon_header = df_main.columns[1]
-    night_header = df_main.columns[2]
+    morning_header = "Morning"
+    afternoon_header = "Afternoon"
+    night_header = "Night"
+    # print(morning_header)
 
-    cleaned_morning_data = remove_outlier(df_main[morning_header].to_numpy()).tolist()
-    cleaned_afternoon_data = remove_outlier(df_main[afternoon_header].to_numpy()).tolist()
-    cleaned_night_data = remove_outlier(df_main[night_header].to_numpy()).tolist()
+    cleaned_morning_data = (df_main[morning_header].to_numpy()).tolist()
+    cleaned_afternoon_data = (df_main[afternoon_header].to_numpy()).tolist()
+    cleaned_night_data = (df_main[night_header].to_numpy()).tolist()
 
     # Plotting out the data
     morning_col = pd.DataFrame({morning_header:cleaned_morning_data})
@@ -33,7 +34,7 @@ if __name__ == "__main__":
 
     ax = sns.boxplot(x="Time of Day", y="KSS val", data=df_melt, color='#99c2a2')
     ax = sns.swarmplot(x="Time of Day", y="KSS val",  data=df_melt, color='#7d0013')
-    title_string = "KSS val" + " vs Time of Day"
+    title_string = "KSS val" + " vs Time of Day for post-experiment"
     ax.set_title(title_string) 
     plt.show()   
 

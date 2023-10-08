@@ -25,9 +25,9 @@ def remove_outlier(arr):
 ## CODE TO RUN
 
 if __name__ == "__main__":
-    df_main = pd.read_csv("features_vs_time_of_day_45.csv")
+    df_main = pd.read_csv("30s/data/features_vs_time_of_day_30.csv")
     df_out = pd.DataFrame()
-    row_headers = ["n_sameple morning", "n_sameple night", "mean_morning", "std_morning", "mean_night", "std_night","t-val", "p-val","alternative", "usable?"]
+    row_headers = ["n_sameple afternoon", "n_sameple night", "mean_afternoon", "std_afternoon", "mean_night", "std_night","t-val", "p-val","alternative", "usable?"]
     row_col = pd.DataFrame({"feature_used":row_headers})
     df_out = pd.concat([df_out, row_col], axis = 1)
     counter = 0
@@ -36,32 +36,32 @@ if __name__ == "__main__":
         if i==384:
             continue
         # Obtaining the data
-        morning_header = df_main.columns[i]
+        afternoon_header = df_main.columns[i+1]
         night_header = df_main.columns[i+2]
 
-        cleaned_morning_data = remove_outlier(df_main[morning_header].to_numpy()).tolist()
+        cleaned_afternoon_data = remove_outlier(df_main[afternoon_header].to_numpy()).tolist()
         cleaned_night_data = remove_outlier(df_main[night_header].to_numpy()).tolist()
 
-        morning_col = pd.DataFrame({morning_header:cleaned_morning_data})
+        afternoon_col = pd.DataFrame({afternoon_header:cleaned_afternoon_data})
         night_col = pd.DataFrame({night_header:cleaned_night_data})
-        df = pd.concat([morning_col, night_col], axis=1)
+        df = pd.concat([afternoon_col, night_col], axis=1)
         # print(df)
 
         # Reshape the dataframe suitable for statsmodels package 
-        # df_melt = pd.melt(df.reset_index(), id_vars=['index'], value_vars=[morning_header, night_header])
-        # df_melt.columns = ['index', 'Drowsiness Level', morning_header[0:-2]]
+        # df_melt = pd.melt(df.reset_index(), id_vars=['index'], value_vars=[afternoon_header, night_header])
+        # df_melt.columns = ['index', 'Drowsiness Level', afternoon_header[0:-2]]
 
         # Showing the box plots
-        # ax = sns.boxplot(x="Drowsiness Level", y=morning_header[0:-2], data=df_melt, color='#99c2a2')
-        # # ax = sns.swarmplot(x="Drowsiness Level", y=morning_header[0:-6], data=df_melt, color='#7d0013')
-        # title_string = morning_header[0:-2] + " vs Drowsiness Level"
+        # ax = sns.boxplot(x="Drowsiness Level", y=afternoon_header[0:-2], data=df_melt, color='#99c2a2')
+        # # ax = sns.swarmplot(x="Drowsiness Level", y=afternoon_header[0:-6], data=df_melt, color='#7d0013')
+        # title_string = afternoon_header[0:-2] + " vs Drowsiness Level"
         # ax.set_title(title_string)    
 
-        cleaned_morning_data_nan = np.array(cleaned_morning_data)
-        cleaned_morning_data = []
-        for i in range(cleaned_morning_data_nan.shape[0]):
-            if not np.isnan(cleaned_morning_data_nan[i]):
-                cleaned_morning_data.append(cleaned_morning_data_nan[i])
+        cleaned_afternoon_data_nan = np.array(cleaned_afternoon_data)
+        cleaned_afternoon_data = []
+        for i in range(cleaned_afternoon_data_nan.shape[0]):
+            if not np.isnan(cleaned_afternoon_data_nan[i]):
+                cleaned_afternoon_data.append(cleaned_afternoon_data_nan[i])
 
         cleaned_night_data_nan = np.array(cleaned_night_data)
         cleaned_night_data = []
@@ -70,9 +70,9 @@ if __name__ == "__main__":
                 cleaned_night_data.append(cleaned_night_data_nan[i])
 
         # Conducting t-tests
-        t_val_less, p_val_less = scipy.stats.ttest_ind(np.array(cleaned_morning_data), np.array(cleaned_night_data), axis=0, equal_var=True, nan_policy='omit', alternative='less', permutations=None, random_state=None, trim=0)
-        t_val_more, p_val_more = scipy.stats.ttest_ind(np.array(cleaned_morning_data), np.array(cleaned_night_data), axis=0, equal_var=True, nan_policy='omit', alternative='greater', permutations=None, random_state=None, trim=0)
-        t_val_two, p_val_two = scipy.stats.ttest_ind(np.array(cleaned_morning_data), np.array(cleaned_night_data), axis=0, equal_var=True, nan_policy='omit', permutations=None, random_state=None, trim=0)
+        t_val_less, p_val_less = scipy.stats.ttest_ind(np.array(cleaned_afternoon_data), np.array(cleaned_night_data), axis=0, equal_var=True, nan_policy='omit', alternative='less', permutations=None, random_state=None, trim=0)
+        t_val_more, p_val_more = scipy.stats.ttest_ind(np.array(cleaned_afternoon_data), np.array(cleaned_night_data), axis=0, equal_var=True, nan_policy='omit', alternative='greater', permutations=None, random_state=None, trim=0)
+        t_val_two, p_val_two = scipy.stats.ttest_ind(np.array(cleaned_afternoon_data), np.array(cleaned_night_data), axis=0, equal_var=True, nan_policy='omit', permutations=None, random_state=None, trim=0)
 
         p_val = np.min([p_val_less, p_val_more, p_val_two])
         id_p = np.argmin([p_val_less, p_val_more, p_val_two])
@@ -90,25 +90,26 @@ if __name__ == "__main__":
         if p_val<0.05:
             flagger = True
             counter +=1
-
+        else:
+            continue
         # Printing out values for visualising
-        mean_morning = np.mean(cleaned_morning_data)
-        std_morning = np.std(cleaned_morning_data)
+        mean_afternoon = np.mean(cleaned_afternoon_data)
+        std_afternoon = np.std(cleaned_afternoon_data)
         mean_night = np.mean(cleaned_night_data)
         std_night = np.std(cleaned_night_data)
-        # print("For " + morning_header[0:-6] + " data,")
-        # print("kss6 mean:" + str(mean_morning), "std: " + str(std_morning))
+        # print("For " + afternoon_header[0:-6] + " data,")
+        # print("kss6 mean:" + str(mean_afternoon), "std: " + str(std_afternoon))
         # print("kss7 mean:" + str(mean_night), "std: " + str(std_night))
         # print("t-value: " + str(t_val), "p-value" + str(p_val))
 
         # plt.show()
 
         # Saving the values
-        array_to_save = [len(cleaned_morning_data), len(cleaned_night_data), mean_morning, std_morning, mean_night, std_night, t_val, p_val, print_alternative, flagger]
-        new_col = pd.DataFrame({morning_header[0:-2]: array_to_save})
+        array_to_save = [len(cleaned_afternoon_data), len(cleaned_night_data), mean_afternoon, std_afternoon, mean_night, std_night, t_val, p_val, print_alternative, flagger]
+        new_col = pd.DataFrame({afternoon_header[0:-2]: array_to_save})
         df_out = pd.concat([df_out, new_col], axis=1)
 
         df = 0
 
     print(counter)
-    df_out.to_csv("results_45s/t_test_features_vs_time_45_mn.csv")
+    df_out.to_csv("30s/result/t_test_features_vs_time_of_day_30_an_only_true.csv")

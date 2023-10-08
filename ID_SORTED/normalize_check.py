@@ -24,7 +24,7 @@ def remove_outlier(arr):
     return new_arr
 
 if __name__ == "__main__":
-    df_main = pd.read_csv("features_analysis_all.csv")
+    df_main = pd.read_csv("features_and_labels_30s.csv")
     df_out = pd.DataFrame()
     row_headers = ["mean", "std", "stat_ks","p-val_ks", "stat_sw", "p_val_sw", "distributed_normally?"]
     row_col = pd.DataFrame({"feature_used":row_headers})
@@ -32,8 +32,11 @@ if __name__ == "__main__":
     counter = 0
 
     for i in range(0,len(df_main.columns)):
+        if i==128:
+            continue
         header = df_main.columns[i]
-        cleaned_data = remove_outlier(df_main[header].to_numpy()).tolist()
+        print(i)
+        cleaned_data = (df_main[header].to_numpy()).tolist()
         cleaned_data_nan = np.array(cleaned_data)
         cleaned_data = []
         for i in range(cleaned_data_nan.shape[0]):
@@ -44,7 +47,7 @@ if __name__ == "__main__":
         [stat_shap, p_val_shapiro] = shapiro(cleaned_data)
 
         flagger = False
-        if p_val<=0.05 and p_val_shapiro<=0.05:
+        if p_val<=0.05:
             flagger = True
             counter += 1
 
@@ -57,4 +60,4 @@ if __name__ == "__main__":
     
     print(counter)
     print(len(df_main.columns))
-    df_out.to_csv("results/normal_checker.csv")
+    df_out.to_csv("results_30s/normal_checker.csv")
