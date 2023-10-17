@@ -31,8 +31,8 @@ if __name__ == "__main__":
     df_melt = pd.melt(df.reset_index(), id_vars=['index'], value_vars=[morning_header, afternoon_header, night_header])
     df_melt.columns = ['index', 'Time of Day', "KSS val"]
 
-    ax = sns.boxplot(x="Time of Day", y="KSS val", data=df_melt, color='#99c2a2')
-    ax = sns.swarmplot(x="Time of Day", y="KSS val",  data=df_melt, color='#7d0013')
+    ax = sns.boxplot(x="Time of Day", y="KSS val", data=df_melt, color='#e3d7e5')
+    ax = sns.swarmplot(x="Time of Day", y="KSS val",  data=df_melt)
     title_string = "KSS val" + " vs Time of Day for pre-experiment"
     ax.set_title(title_string) 
     plt.show()   
